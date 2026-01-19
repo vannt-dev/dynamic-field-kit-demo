@@ -4,6 +4,7 @@ import { useState } from "react"
 import { MultiFieldInput } from "@dynamic-field-kit/react"
 import { FieldDescription } from "@dynamic-field-kit/core"
 import "@/lib/fieldRegistry"
+import { fieldRegistry } from "@dynamic-field-kit/core"
 
 const fields: FieldDescription[] = [
   { name: "name", type: "text", label: "Name" },
@@ -12,7 +13,6 @@ const fields: FieldDescription[] = [
 
 export default function Page() {
   const [data, setData] = useState({})
-
   return (
     <main style={{ padding: 24 }}>
       <MultiFieldInput

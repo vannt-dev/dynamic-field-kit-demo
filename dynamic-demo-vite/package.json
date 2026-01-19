@@ -10,8 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@dynamic-field-kit/core": "^1.0.4",
-    "@dynamic-field-kit/react": "^1.0.4",
+    "@dynamic-field-kit/core": "^1.0.5",
+    "@dynamic-field-kit/react": "^1.0.5",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
   },

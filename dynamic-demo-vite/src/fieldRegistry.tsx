@@ -1,4 +1,4 @@
-import { fieldRegistry } from "@dynamic-field-kit/core"
+import { fieldRegistry } from "@dynamic-field-kit/react"
 
 fieldRegistry.register("text", ({ value, onValueChange, label }) => (
   <div>
