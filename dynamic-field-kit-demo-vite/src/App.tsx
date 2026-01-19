@@ -2,7 +2,6 @@ import { useState } from "react"
 import { MultiFieldInput } from "@dynamic-field-kit/react"
 import { userForm } from "./form"
 import "./fieldRegistry"
-import "./types/dynamic-field-kit"
 
 export default function App() {
   const [data, setData] = useState({})

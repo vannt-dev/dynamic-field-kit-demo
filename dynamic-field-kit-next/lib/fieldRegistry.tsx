@@ -16,3 +16,5 @@ fieldRegistry.register("number", ({ value, onValueChange }) => (
     onChange={(e) => onValueChange?.(Number(e.target.value))}
   />
 ))
+
+export {}
