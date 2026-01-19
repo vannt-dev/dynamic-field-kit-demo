@@ -4,7 +4,5 @@ declare module "@dynamic-field-kit/core" {
   interface FieldTypeMap {
     text: string
     number: number
-    checkbox: boolean
-    select: string
   }
 }
