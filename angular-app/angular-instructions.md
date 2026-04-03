@@ -30,21 +30,38 @@ npm install @dynamic-field-kit/core @dynamic-field-kit/angular
 ```ts
 // src/main.ts
 import 'zone.js';
-import { bootstrapApplication } from '@angular/platform-browser';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { fieldRegistry } from '@dynamic-field-kit/angular';
-import { AppComponent } from './app/app.component';
+import { AppModule } from './app/app.module';
 import { TextFieldComponent } from './app/components/text-field.component';
 import { NumberFieldComponent } from './app/components/number-field.component';
 
 fieldRegistry.register('text', TextFieldComponent as any);
 fieldRegistry.register('number', NumberFieldComponent as any);
 
-bootstrapApplication(AppComponent, {
-  providers: [],
-}).catch((err) => console.error(err));
+platformBrowserDynamic()
+  .bootstrapModule(AppModule)
+  .catch((err) => console.error(err));
 ```
 
-4. Implement field renderer components:
+4. Import the module in your Angular app:
+
+```ts
+// src/app/app.module.ts
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { DynamicFieldKitModule } from '@dynamic-field-kit/angular';
+import { AppComponent } from './app.component';
+
+@NgModule({
+  declarations: [AppComponent],
+  imports: [BrowserModule, DynamicFieldKitModule],
+  bootstrap: [AppComponent],
+})
+export class AppModule {}
+```
+
+5. Implement field renderer components:
 
 ```ts
 // src/app/components/text-field.component.ts
@@ -73,19 +90,15 @@ export class TextFieldComponent {
 }
 ```
 
-5. Use `dfk-multi-field-input` in your standalone component:
+6. Use `dfk-multi-field-input` in your app:
 
 ```ts
 // src/app/app.component.ts
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { MultiFieldInput } from '@dynamic-field-kit/angular';
 import { FieldDescription } from '@dynamic-field-kit/core';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
-  imports: [CommonModule, MultiFieldInput],
   templateUrl: './app.component.html',
 })
 export class AppComponent {
@@ -113,5 +126,6 @@ export class AppComponent {
 
 Notes
 
+- Use `DynamicFieldKitModule` as the default integration path.
 - Do not import package internals from `@dynamic-field-kit/angular/src/...` in a consumer app.
 - Register Angular component classes in `fieldRegistry`; do not register React or Vue components.
