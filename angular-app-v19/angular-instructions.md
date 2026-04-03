@@ -8,7 +8,6 @@ Summary
 - Register your Angular field components in the shared `fieldRegistry` before bootstrap.
 - Use `dfk-multi-field-input` in your template.
 - `layout` currently supports `column`, `row`, and `grid`.
-- When linking the package locally with `file:`, set `preserveSymlinks: true` in `angular.json`.
 
 Quick start
 
@@ -20,50 +19,13 @@ ng new my-dfk-app --defaults --skip-git
 cd my-dfk-app
 ```
 
-2. Install the library packages.
-
-Published package:
+2. Install the library packages:
 
 ```bash
 npm install @dynamic-field-kit/core @dynamic-field-kit/angular
 ```
 
-Local monorepo development:
-
-```json
-{
-  "dependencies": {
-    "@dynamic-field-kit/core": "file:../packages/core",
-    "@dynamic-field-kit/angular": "file:../packages/angular/dist"
-  }
-}
-```
-
-Then run:
-
-```bash
-npm install
-```
-
-3. If you are using a local `file:` dependency, enable `preserveSymlinks` in `angular.json`:
-
-```json
-{
-  "projects": {
-    "my-dfk-app": {
-      "architect": {
-        "build": {
-          "options": {
-            "preserveSymlinks": true
-          }
-        }
-      }
-    }
-  }
-}
-```
-
-4. Register Angular field renderers before bootstrap:
+3. Register Angular field renderers before bootstrap:
 
 ```ts
 // src/main.ts
@@ -82,7 +44,7 @@ bootstrapApplication(AppComponent, {
 }).catch((err) => console.error(err));
 ```
 
-5. Implement field renderer components:
+4. Implement field renderer components:
 
 ```ts
 // src/app/components/text-field.component.ts
@@ -111,7 +73,7 @@ export class TextFieldComponent {
 }
 ```
 
-6. Use `dfk-multi-field-input` in your standalone component:
+5. Use `dfk-multi-field-input` in your standalone component:
 
 ```ts
 // src/app/app.component.ts
@@ -153,4 +115,3 @@ Notes
 
 - Do not import package internals from `@dynamic-field-kit/angular/src/...` in a consumer app.
 - Register Angular component classes in `fieldRegistry`; do not register React or Vue components.
-- If you rebuild `packages/angular` in a linked local setup, restart `ng serve` so Angular CLI reloads the updated package.
