@@ -1,0 +1,18 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "sourceMap": true,
+    "declaration": false,
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "module": "es2020",
+    "moduleResolution": "node",
+    "target": "ES2022",
+    "useDefineForClassFields": false,
+    "typeRoots": ["node_modules/@types"],
+    "lib": ["ES2022", "dom"],
+    "skipLibCheck": true
+  }
+}

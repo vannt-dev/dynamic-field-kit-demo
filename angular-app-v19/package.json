@@ -1,0 +1,24 @@
+{
+  "name": "example-angular-app",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "start": "ng serve --open",
+    "build": "ng build"
+  },
+  "dependencies": {
+    "@angular/common": "^19.0.0",
+    "@angular/core": "^19.0.0",
+    "@angular/platform-browser": "^19.0.0",
+    "@angular/platform-browser-dynamic": "^19.0.0",
+    "@dynamic-field-kit/angular": "^1.2.10",
+    "@dynamic-field-kit/core": "^1.1.0",
+    "zone.js": "^0.15.0"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "^19.0.0",
+    "@angular/cli": "^19.0.0",
+    "@angular/compiler-cli": "^19.0.0",
+    "typescript": "~5.5.0"
+  }
+}
