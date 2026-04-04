@@ -70,6 +70,7 @@ jobs:
           mv react-app/.next dist/react-app
 
       - name: Install and Build dynamic-demo-next
+        if: false
         working-directory: ./dynamic-demo-next
         run: |
           rm -rf node_modules package-lock.json
@@ -135,11 +136,6 @@ jobs:
                 <a href="/react-app/" class="card">
                   <h2>React + Next.js (App Router)</h2>
                   <p>React with Next.js App Router</p>
-                  <span class="tag tag-react">React</span>
-                </a>
-                <a href="/dynamic-demo-next/" class="card">
-                  <h2>Next.js (Pages Router)</h2>
-                  <p>Next.js with Pages Router</p>
                   <span class="tag tag-react">React</span>
                 </a>
                 <a href="/dynamic-demo-vite/" class="card">
