@@ -1,0 +1,161 @@
+name: Deploy Demo Apps
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install and Build Angular 15
+        working-directory: ./angular-app
+        run: |
+          npm ci
+          npm run build -- --output-path=../dist/angular-app
+
+      - name: Install and Build Angular 19
+        working-directory: ./angular-app-v19
+        run: |
+          npm ci
+          npm run build -- --output-path=../dist/angular-app-v19
+
+      - name: Install and Build Vue App
+        working-directory: ./vue-app
+        run: |
+          npm ci
+          npm run build
+        shell: bash
+
+      - name: Move Vue dist
+        run: mv vue-app/dist dist/vue-app
+
+      - name: Install and Build React App (Next.js)
+        working-directory: ./react-app
+        run: |
+          npm ci
+          npm run build
+
+      - name: Move Next.js static output
+        run: |
+          mv react-app/out dist/react-app
+
+      - name: Install and Build dynamic-demo-next
+        working-directory: ./dynamic-demo-next
+        run: |
+          npm ci
+          npm run build
+
+      - name: Move dynamic-demo-next
+        run: |
+          mv dynamic-demo-next/out dist/dynamic-demo-next
+
+      - name: Install and Build dynamic-demo-vite
+        working-directory: ./dynamic-demo-vite
+        run: |
+          npm ci
+          npm run build
+
+      - name: Move dynamic-demo-vite
+        run: |
+          mv dynamic-demo-vite/dist dist/dynamic-demo-vite
+
+      - name: Create Index Page
+        run: |
+          cat > dist/index.html << 'EOF'
+          <!DOCTYPE html>
+          <html lang="en">
+          <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Dynamic Field Kit Demos</title>
+            <style>
+              * { margin: 0; padding: 0; box-sizing: border-box; }
+              body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f5f5f5; padding: 40px; }
+              .container { max-width: 1200px; margin: 0 auto; }
+              h1 { text-align: center; margin-bottom: 40px; color: #333; }
+              .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+              .card { background: white; border-radius: 12px; padding: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: transform 0.2s, box-shadow 0.2s; text-decoration: none; color: inherit; display: block; }
+              .card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
+              .card h2 { font-size: 20px; margin-bottom: 8px; color: #222; }
+              .card p { color: #666; font-size: 14px; }
+              .tag { display: inline-block; padding: 4px 12px; border-radius: 16px; font-size: 12px; margin-top: 12px; }
+              .tag-angular { background: #dd0031; color: white; }
+              .tag-react { background: #61dafb; color: #000; }
+              .tag-vue { background: #42b883; color: white; }
+            </style>
+          </head>
+          <body>
+            <div class="container">
+              <h1>Dynamic Field Kit Demo Apps</h1>
+              <div class="grid">
+                <a href="/angular-app/" class="card">
+                  <h2>Angular 15</h2>
+                  <p>Angular with NgModule bootstrap</p>
+                  <span class="tag tag-angular">Angular</span>
+                </a>
+                <a href="/angular-app-v19/" class="card">
+                  <h2>Angular 19</h2>
+                  <p>Angular with standalone components</p>
+                  <span class="tag tag-angular">Angular</span>
+                </a>
+                <a href="/vue-app/" class="card">
+                  <h2>Vue 3 + Vite</h2>
+                  <p>Vue 3 with Composition API</p>
+                  <span class="tag tag-vue">Vue</span>
+                </a>
+                <a href="/react-app/" class="card">
+                  <h2>React + Next.js (App Router)</h2>
+                  <p>React with Next.js App Router</p>
+                  <span class="tag tag-react">React</span>
+                </a>
+                <a href="/dynamic-demo-next/" class="card">
+                  <h2>Next.js (Pages Router)</h2>
+                  <p>Next.js with Pages Router</p>
+                  <span class="tag tag-react">React</span>
+                </a>
+                <a href="/dynamic-demo-vite/" class="card">
+                  <h2>React + Vite</h2>
+                  <p>React with Vite bundler</p>
+                  <span class="tag tag-react">React</span>
+                </a>
+              </div>
+            </div>
+          </body>
+          </html>
+          EOF
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
