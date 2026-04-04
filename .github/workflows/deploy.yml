@@ -27,6 +27,7 @@ jobs:
           node-version: '20'
 
       - name: Install and Build Angular 15
+        if: false
         working-directory: ./angular-app
         run: |
           rm -rf node_modules package-lock.json
@@ -113,11 +114,6 @@ jobs:
             <div class="container">
               <h1>Dynamic Field Kit Demo Apps</h1>
               <div class="grid">
-                <a href="/angular-app/" class="card">
-                  <h2>Angular 15</h2>
-                  <p>Angular with NgModule bootstrap</p>
-                  <span class="tag tag-angular">Angular</span>
-                </a>
                 <a href="/angular-app-v19/" class="card">
                   <h2>Angular 19</h2>
                   <p>Angular with standalone components</p>
