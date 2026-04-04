@@ -29,19 +29,22 @@ jobs:
       - name: Install and Build Angular 15
         working-directory: ./angular-app
         run: |
-          npm install
+          rm -rf node_modules
+          npm install --force --legacy-peer-deps
           npm run build -- --output-path=../dist/angular-app
 
       - name: Install and Build Angular 19
         working-directory: ./angular-app-v19
         run: |
-          npm install
+          rm -rf node_modules
+          npm install --force --legacy-peer-deps
           npm run build -- --output-path=../dist/angular-app-v19
 
       - name: Install and Build Vue App
         working-directory: ./vue-app
         run: |
-          npm install
+          rm -rf node_modules
+          npm install --force --legacy-peer-deps
           npm run build
         shell: bash
 
@@ -51,7 +54,8 @@ jobs:
       - name: Install and Build React App (Next.js)
         working-directory: ./react-app
         run: |
-          npm install
+          rm -rf node_modules
+          npm install --force --legacy-peer-deps
           npm run build
 
       - name: Move Next.js static output
@@ -61,7 +65,8 @@ jobs:
       - name: Install and Build dynamic-demo-next
         working-directory: ./dynamic-demo-next
         run: |
-          npm install
+          rm -rf node_modules
+          npm install --force --legacy-peer-deps
           npm run build
 
       - name: Move dynamic-demo-next
@@ -71,7 +76,8 @@ jobs:
       - name: Install and Build dynamic-demo-vite
         working-directory: ./dynamic-demo-vite
         run: |
-          npm install
+          rm -rf node_modules
+          npm install --force --legacy-peer-deps
           npm run build
 
       - name: Move dynamic-demo-vite
