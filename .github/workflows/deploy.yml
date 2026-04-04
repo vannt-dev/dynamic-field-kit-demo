@@ -78,6 +78,7 @@ jobs:
           npm run build
 
       - name: Move dynamic-demo-next
+        if: false
         run: |
           mkdir -p dist
           mv dynamic-demo-next/.next dist/dynamic-demo-next
