@@ -147,14 +147,10 @@ jobs:
           </html>
           EOF
 
-      - name: List dist contents
+      - name: Check index.html
         run: |
-          echo "=== dist root ==="
-          ls -la dist/
-          echo "=== vue-app ==="
-          ls -la dist/vue-app/
-          echo "=== react-app ==="
-          ls -la dist/react-app/
+          echo "=== index.html ==="
+          cat dist/index.html
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
