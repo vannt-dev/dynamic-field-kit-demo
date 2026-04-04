@@ -11,6 +11,7 @@
     "@angular/core": "^19.0.0",
     "@angular/platform-browser": "^19.0.0",
     "@angular/platform-browser-dynamic": "^19.0.0",
+    "@angular/compiler": "^19.0.0",
     "@dynamic-field-kit/angular": "^1.2.10",
     "@dynamic-field-kit/core": "^1.1.0",
     "zone.js": "^0.15.0"
