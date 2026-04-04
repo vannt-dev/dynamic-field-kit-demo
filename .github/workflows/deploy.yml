@@ -147,6 +147,15 @@ jobs:
           </html>
           EOF
 
+      - name: List dist contents
+        run: |
+          echo "=== dist root ==="
+          ls -la dist/
+          echo "=== vue-app ==="
+          ls -la dist/vue-app/
+          echo "=== react-app ==="
+          ls -la dist/react-app/
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
