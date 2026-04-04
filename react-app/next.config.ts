@@ -5,6 +5,8 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: __dirname,
   },
+  basePath: '/react-app',
+  output: 'export',
 };
 
 export default nextConfig;

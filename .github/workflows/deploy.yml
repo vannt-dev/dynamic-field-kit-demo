@@ -67,7 +67,7 @@ jobs:
       - name: Move Next.js static output
         run: |
           mkdir -p dist
-          mv react-app/.next dist/react-app
+          mv react-app/out dist/react-app
 
       - name: Install and Build dynamic-demo-next
         if: false
