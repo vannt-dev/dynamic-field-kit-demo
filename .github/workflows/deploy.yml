@@ -29,21 +29,21 @@ jobs:
       - name: Install and Build Angular 15
         working-directory: ./angular-app
         run: |
-          rm -rf node_modules
+          rm -rf node_modules package-lock.json
           npm install --force --legacy-peer-deps
           npm run build -- --output-path=../dist/angular-app
 
       - name: Install and Build Angular 19
         working-directory: ./angular-app-v19
         run: |
-          rm -rf node_modules
+          rm -rf node_modules package-lock.json
           npm install --force --legacy-peer-deps
           npm run build -- --output-path=../dist/angular-app-v19
 
       - name: Install and Build Vue App
         working-directory: ./vue-app
         run: |
-          rm -rf node_modules
+          rm -rf node_modules package-lock.json
           npm install --force --legacy-peer-deps
           npm run build
         shell: bash
@@ -54,7 +54,7 @@ jobs:
       - name: Install and Build React App (Next.js)
         working-directory: ./react-app
         run: |
-          rm -rf node_modules
+          rm -rf node_modules package-lock.json
           npm install --force --legacy-peer-deps
           npm run build
 
@@ -65,7 +65,7 @@ jobs:
       - name: Install and Build dynamic-demo-next
         working-directory: ./dynamic-demo-next
         run: |
-          rm -rf node_modules
+          rm -rf node_modules package-lock.json
           npm install --force --legacy-peer-deps
           npm run build
 
@@ -76,7 +76,7 @@ jobs:
       - name: Install and Build dynamic-demo-vite
         working-directory: ./dynamic-demo-vite
         run: |
-          rm -rf node_modules
+          rm -rf node_modules package-lock.json
           npm install --force --legacy-peer-deps
           npm run build
 
