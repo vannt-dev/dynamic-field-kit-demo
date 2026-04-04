@@ -50,8 +50,12 @@ jobs:
           npm run build
         shell: bash
 
+      - name: Create dist directory
+        run: mkdir -p dist
+
       - name: Move Vue dist
-        run: mv vue-app/dist dist/vue-app
+        run: |
+          mv vue-app/dist dist/vue-app
 
       - name: Install and Build React App (Next.js)
         working-directory: ./react-app
@@ -62,6 +66,7 @@ jobs:
 
       - name: Move Next.js static output
         run: |
+          mkdir -p dist
           mv react-app/.next dist/react-app
 
       - name: Install and Build dynamic-demo-next
@@ -73,6 +78,7 @@ jobs:
 
       - name: Move dynamic-demo-next
         run: |
+          mkdir -p dist
           mv dynamic-demo-next/.next dist/dynamic-demo-next
 
       - name: Install and Build dynamic-demo-vite
@@ -84,6 +90,7 @@ jobs:
 
       - name: Move dynamic-demo-vite
         run: |
+          mkdir -p dist
           mv dynamic-demo-vite/dist dist/dynamic-demo-vite
 
       - name: Create Index Page
