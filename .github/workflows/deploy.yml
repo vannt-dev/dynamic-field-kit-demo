@@ -84,6 +84,7 @@ jobs:
           mv dynamic-demo-next/.next dist/dynamic-demo-next
 
       - name: Install and Build dynamic-demo-vite
+        if: false
         working-directory: ./dynamic-demo-vite
         run: |
           rm -rf node_modules package-lock.json
@@ -91,6 +92,7 @@ jobs:
           npm run build
 
       - name: Move dynamic-demo-vite
+        if: false
         run: |
           mkdir -p dist
           mv dynamic-demo-vite/dist dist/dynamic-demo-vite
@@ -137,11 +139,6 @@ jobs:
                 <a href="/react-app/" class="card">
                   <h2>React + Next.js (App Router)</h2>
                   <p>React with Next.js App Router</p>
-                  <span class="tag tag-react">React</span>
-                </a>
-                <a href="/dynamic-demo-vite/" class="card">
-                  <h2>React + Vite</h2>
-                  <p>React with Vite bundler</p>
                   <span class="tag tag-react">React</span>
                 </a>
               </div>
