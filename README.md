@@ -1,5 +1,10 @@
 # dynamic-field-kit-demo
 
+> **Archived.** The demos now live in [dynamic-field-kit](https://github.com/vannt-dev/dynamic-field-kit)
+> itself, under `example/`, and are built from the same commit as the packages:
+> [live demos](https://vannt-dev.github.io/dynamic-field-kit/). The apps in this repository use an
+> early release of the kit (core 1.0, react 1.1) and are kept for reference only.
+
 Demo apps for `Dynamic Field Kit` across multiple frameworks.
 
 ## Apps
